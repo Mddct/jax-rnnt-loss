@@ -104,35 +104,6 @@ def log_probs_from_blank_and_tokens(log_prob_blank: jax.Array,
     return log_probs
 
 
-def nd_dense_init(scale, mode, distribution):
-    """Initializer with in_axis, out_axis set at call time."""
-
-    def init_fn(key, shape, dtype, in_axis, out_axis):
-        fn = jax.nn.initializers.variance_scaling(scale, mode, distribution,
-                                                  in_axis, out_axis)
-        return fn(key, shape, dtype)
-
-    return init_fn
-
-
-class LogitsToLogProbs(nn.Module):
-
-    blank_id: int
-    blank_logit_bias: float = 0
-
-    def __call__(
-        self,
-        logits: jax.Array,
-    ) -> Any:
-        vocab_size = logits.shape[-1]
-        blank_id_onehot = jax.nn.one_hot(self.blank_id, vocab_size)
-        log_prob_tokens = jax.nn.log_softmax(logits + self.blank_logit_bias *
-                                             blank_id_onehot)
-        log_prob_blank = log_prob_tokens[..., self.blank_id]
-        log_prob_tokens += _NEG_INF * blank_id_onehot
-        return log_prob_blank, log_prob_tokens
-
-
 @dataclass
 class Seq:
     data: jax.Array
