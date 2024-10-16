@@ -21,4 +21,15 @@
   pages={506-512},
   keywords={Computational modeling;Graphics processing units;Transducers;Acoustics;Recurrent neural networks;Hidden Markov models;Benchmark testing;recurrent neural network transducer;forward-backward algorithm;TensorFlow;GPU;TPU},
   doi={10.1109/SLT.2018.8639690}}
+
+
+@misc{variani2020hybridautoregressivetransducerhat,
+      title={Hybrid Autoregressive Transducer (hat)}, 
+      author={Ehsan Variani and David Rybach and Cyril Allauzen and Michael Riley},
+      year={2020},
+      eprint={2003.07705},
+      archivePrefix={arXiv},
+      primaryClass={eess.AS},
+      url={https://arxiv.org/abs/2003.07705}, 
+}
 ```
